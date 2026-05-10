@@ -556,33 +556,45 @@ textarea {
     linear-gradient(135deg, rgba(116, 247, 161, 0.11), rgba(103, 232, 249, 0.1));
 }
 
-.projects-grid {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 24px;
+.projects-carousel {
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 28px;
-  padding-inline: 4px;
-  margin-inline: -4px;
-  scroll-behavior: smooth;
+  width: 100%;
+  position: relative;
+  padding: 20px 0 40px;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  cursor: grab;
+  user-select: none;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--cyan) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.projects-grid::-webkit-scrollbar {
-  height: 6px;
+.projects-carousel.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
 }
 
-.projects-grid::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 10px;
+.projects-carousel::-webkit-scrollbar {
+  display: none;
 }
 
-.projects-grid::-webkit-scrollbar-thumb {
-  background: var(--line-strong);
-  border-radius: 10px;
+.projects-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  padding-right: 24px;
+  will-change: transform;
+}
+
+.projects-track [aria-hidden="true"] {
+  user-select: none;
+}
+
+.project-card img,
+.project-card .project-thumb {
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .project-card {
@@ -590,7 +602,6 @@ textarea {
   display: flex;
   flex-direction: column;
   flex: 0 0 400px;
-  scroll-snap-align: start;
   overflow: hidden;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -966,6 +977,36 @@ textarea {
   }
 }
 
+.form-status {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  display: none;
+}
+
+.form-status.success {
+  display: block;
+  background: rgba(116, 247, 161, 0.1);
+  color: var(--green);
+  border: 1px solid rgba(116, 247, 161, 0.2);
+}
+
+.form-status.error {
+  display: block;
+  background: rgba(244, 114, 182, 0.1);
+  color: var(--pink);
+  border: 1px solid rgba(244, 114, 182, 0.2);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
 @media (max-width: 680px) {
   .container {
     width: min(var(--max-width), calc(100% - 24px));
@@ -988,6 +1029,18 @@ textarea {
   .certificate-grid,
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  .projects-carousel {
+    overflow-x: auto;
+    padding-inline: 16px;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .projects-track {
+    animation: none;
+    width: max-content;
   }
 
   .project-card {
