@@ -1,11 +1,22 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector(".site-nav");
 const navLinks = document.querySelectorAll(".site-nav a");
-const revealItems = document.querySelectorAll(".reveal");
 const sections = document.querySelectorAll("main section[id]");
+const revealItems = document.querySelectorAll(".reveal");
+const particleField = document.querySelector(".particle-field");
+const contactForm = document.querySelector(".contact-form");
+
+function closeMenu() {
+  if (!siteNav || !navToggle) {
+    return;
+  }
+
+  siteNav.classList.remove("is-open");
+  document.body.classList.remove("nav-open");
+  navToggle.setAttribute("aria-expanded", "false");
+}
 
 if (navToggle && siteNav) {
-  // Toggles the compact mobile navigation menu.
   navToggle.addEventListener("click", () => {
     const isOpen = siteNav.classList.toggle("is-open");
     document.body.classList.toggle("nav-open", isOpen);
@@ -13,37 +24,30 @@ if (navToggle && siteNav) {
   });
 
   navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      closeMenu();
-    });
+    link.addEventListener("click", closeMenu);
   });
 
-  // Close menu on ESC key
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && siteNav.classList.contains("is-open")) {
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
       closeMenu();
     }
   });
+}
 
-  // Close menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (
-      siteNav.classList.contains("is-open") &&
-      !siteNav.contains(e.target) &&
-      !navToggle.contains(e.target)
-    ) {
-      closeMenu();
-    }
-  });
+if (particleField) {
+  const particleCount = window.matchMedia("(max-width: 680px)").matches ? 22 : 42;
 
-  function closeMenu() {
-    siteNav.classList.remove("is-open");
-    document.body.classList.remove("nav-open");
-    navToggle.setAttribute("aria-expanded", "false");
+  for (let index = 0; index < particleCount; index += 1) {
+    const particle = document.createElement("span");
+    particle.className = "particle";
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.setProperty("--duration", `${4 + Math.random() * 6}s`);
+    particle.style.animationDelay = `${Math.random() * 4}s`;
+    particleField.appendChild(particle);
   }
 }
 
-// Reveals sections with a small fade and slide effect.
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -54,35 +58,64 @@ const revealObserver = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.18,
+    threshold: 0.16,
+    rootMargin: "0px 0px -60px 0px",
   }
 );
 
-revealItems.forEach((item) => {
+revealItems.forEach((item, index) => {
+  item.style.transitionDelay = `${Math.min(index * 35, 240)}ms`;
   revealObserver.observe(item);
 });
 
-// Highlights the nav link for the section currently in view.
-const sectionObserver = new IntersectionObserver(
+const navObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      const link = document.querySelector(`.site-nav a[href="#${entry.target.id}"]`);
-      if (!link) {
+      if (!entry.isIntersecting) {
         return;
       }
 
-      if (entry.isIntersecting) {
-        navLinks.forEach((navLink) => navLink.classList.remove("active"));
-        link.classList.add("active");
+      navLinks.forEach((link) => link.classList.remove("active"));
+      const activeLink = document.querySelector(`.site-nav a[href="#${entry.target.id}"]`);
+
+      if (activeLink) {
+        activeLink.classList.add("active");
       }
     });
   },
   {
-    rootMargin: "-35% 0px -45% 0px",
+    rootMargin: "-38% 0px -48% 0px",
     threshold: 0,
   }
 );
 
 sections.forEach((section) => {
-  sectionObserver.observe(section);
+  navObserver.observe(section);
 });
+
+document.querySelectorAll(".portal-card, .project-card, .skill-card").forEach((card) => {
+  card.addEventListener("pointermove", (event) => {
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  });
+});
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const button = contactForm.querySelector("button");
+    const originalText = button.textContent;
+
+    button.textContent = "Message UI Ready";
+    button.disabled = true;
+
+    window.setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+      contactForm.reset();
+    }, 1400);
+  });
+}

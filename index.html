@@ -5,15 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta
     name="description"
-    content="Personal portfolio of a Computer Science student focused on software development, projects, and technical growth."
+    content="Diomale Romero's developer hub for game development, software engineering, projects, certificates, and experiments."
   >
-  <title>Diomale Romero | Computer Science Portfolio</title>
+  <title>Diomale Romero | Developer Hub</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="page-glow" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="particle-field" aria-hidden="true"></div>
+
   <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="#home">Diomale Romero</a>
+    <div class="container nav-shell">
+      <a class="brand" href="#home" aria-label="Go to home">
+        <span class="brand-mark">DR</span>
+        <span>Diomale</span>
+      </a>
+
       <button
         class="nav-toggle"
         type="button"
@@ -25,12 +33,13 @@
         <span></span>
         <span></span>
       </button>
+
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-        <a href="#home">Home</a>
         <a href="#about">About</a>
+        <a href="#websites">Websites</a>
         <a href="#projects">Projects</a>
-        <a href="#tech-stack">Tech Stack</a>
-        <a href="#experience">Experience</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -38,78 +47,130 @@
 
   <main>
     <section class="hero section" id="home">
-      <div class="container hero-grid">
+      <div class="container hero-layout">
         <div class="hero-copy reveal">
-          <p class="section-label">Computer Science Student</p>
-          <h1>Building practical software and preparing for a career in tech.</h1>
+          <p class="eyebrow">Developer portal online</p>
+          <h1>Computer Science Student &bull; Game Developer &bull; Software Developer</h1>
           <p class="hero-text">
-            I am a Computer Science student focused on software development, Game Development,
-            problem-solving, and building projects that turn ideas into useful digital products.
+            I build games, web systems, and digital experiences that combine practical
+            engineering with creative interaction design.
           </p>
+
           <div class="hero-actions">
-            <a class="button button-primary" href="#projects">View Projects</a>
-            <a class="button button-secondary" href="#contact">Contact Me</a>
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-secondary" href="#websites">Explore My Websites</a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
           </div>
         </div>
 
-        <aside class="hero-panel reveal">
-          <div class="hero-panel-card">
-            <p class="mono-label">Current Focus</p>
-            <ul class="hero-points">
-              <li>full-stack fundamentals</li>
-              <li>Clean, maintainable code practices</li>
-              <li>Game Development 2D and 3D game styles</li>
-            </ul>
+        <aside class="hero-terminal reveal" aria-label="Developer status">
+          <div class="terminal-header">
+            <span></span>
+            <span></span>
+            <span></span>
+            <p>portfolio-os</p>
           </div>
-          <div class="hero-panel-card">
-            <p class="mono-label">Career Goal</p>
-            <p>
-              Seeking opportunities to grow into a software development roles and Game Development path;
-              where I can contribute, learn fast, and build reliable products.
-            </p>
+          <div class="terminal-body">
+            <p><span>const</span> focus = "games + systems";</p>
+            <p><span>build</span>("Unity AI", "Laravel apps", "clean UI");</p>
+            <p><span>ship</span>("developer brand");</p>
+          </div>
+          <div class="floating-stack" aria-label="Technology highlights">
+            <span>Unity</span>
+            <span>Laravel</span>
+            <span>JavaScript</span>
+            <span>PHP</span>
+            <span>Python</span>
+            <span>MySQL</span>
+            <span>HTML</span>
+            <span>CSS</span>
           </div>
         </aside>
       </div>
     </section>
 
     <section class="section" id="about">
-      <div class="container">
+      <div class="container split-layout">
         <div class="section-heading reveal">
-          <p class="section-label">About</p>
-          <h2>Focused on learning, building, and entering the tech industry with strong fundamentals.</h2>
-          <p class="section-text">
-            I am a Computer Science student with an interest in software development,
-            Game Development, and solving real problems through code. My goal is to
-            continue building meaningful projects, strengthen my technical foundation, and
-            prepare for opportunities in the tech industry.
+          <p class="eyebrow">About</p>
+          <h2>Building real systems and interactive experiences.</h2>
+          <p>
+            I am a Computer Science student passionate about game development,
+            software engineering, and building useful systems that solve real workflow
+            problems. My work connects gameplay thinking, backend logic, clean interfaces,
+            and continuous experimentation.
           </p>
         </div>
 
         <div class="about-grid">
-          <article class="info-card reveal">
-            <h3>Background</h3>
-            <p>
-              <li><a href="">Networking</a></li>
-              <li><a href="">Ai & Data Science</a></li>
-              <li><a href="">Game Development</a></li>
-              <li><a href="">Cybersecurity</a></li>
-            </p>
+          <article class="glass-card reveal">
+            <span class="card-icon">01</span>
+            <h3>Game Development</h3>
+            <p>Unity prototypes, AI enemy behavior, gameplay mechanics, and player-focused interaction.</p>
           </article>
-          <article class="info-card reveal">
-            <h3>Goals</h3>
-            <p>
-              <li>frontend developer</li>
-              <li>software engineer</li>
-              <li>full-stack developer</li>
-              <li>Game Development</li>
-            </p>
+          <article class="glass-card reveal">
+            <span class="card-icon">02</span>
+            <h3>Software Engineering</h3>
+            <p>Laravel systems, JavaScript interfaces, PHP backends, Python tooling, and maintainable code.</p>
           </article>
-          <article class="info-card reveal">
-            <h3>Approach</h3>
-            <p>
-              Mention how you learn: through hands-on projects, documentation, iteration,
-              team collaboration, and constant improvement of your coding practices.
-            </p>
+          <article class="glass-card reveal">
+            <span class="card-icon">03</span>
+            <h3>Real-World Systems</h3>
+            <p>Management tools, databases, responsive pages, and practical software for actual users.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section portal-section" id="websites">
+      <div class="container">
+        <div class="section-heading centered reveal">
+          <p class="eyebrow">Website Portal</p>
+          <h2>Choose a specialized path.</h2>
+          <p>
+            This homepage works as the central hub that routes visitors to focused parts
+            of my work: game development, software development, and experiments.
+          </p>
+        </div>
+
+        <div class="portal-grid">
+          <article class="portal-card reveal">
+            <div class="portal-visual portal-game"></div>
+            <p class="eyebrow">Game Development</p>
+            <h3>Unity Projects</h3>
+            <ul>
+              <li>Unity projects</li>
+              <li>AI systems</li>
+              <li>Gameplay mechanics</li>
+              <li>Devlogs</li>
+            </ul>
+            <a class="btn btn-card" href="#projects">Enter Game Portfolio</a>
+          </article>
+
+          <article class="portal-card reveal">
+            <div class="portal-visual portal-software"></div>
+            <p class="eyebrow">Software Development</p>
+            <h3>Full-Stack Systems</h3>
+            <ul>
+              <li>Web systems</li>
+              <li>Backend development</li>
+              <li>Databases</li>
+              <li>Full-stack projects</li>
+            </ul>
+            <a class="btn btn-card" href="#projects">Enter Software Portfolio</a>
+          </article>
+
+          <article class="portal-card reveal">
+            <div class="portal-visual portal-lab"></div>
+            <p class="eyebrow">Experimental Lab</p>
+            <h3>Prototype Space</h3>
+            <ul>
+              <li>AI experiments</li>
+              <li>Prototypes</li>
+              <li>Research projects</li>
+              <li>Technical explorations</li>
+            </ul>
+            <a class="btn btn-card" href="#projects">Explore Lab</a>
           </article>
         </div>
       </div>
@@ -118,203 +179,329 @@
     <section class="section" id="projects">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="section-label">Projects</p>
-          <h2>Selected work that demonstrates technical skill and growth.</h2>
-          <p class="section-text">
-            Replace the placeholder content below with your real projects. Keep each entry
-            focused on the problem, your contribution, and the technologies used.
+          <p class="eyebrow">Featured Projects</p>
+          <h2>Systems, games, and interface work.</h2>
+          <p>
+            A project showcase combining academic systems, Laravel applications,
+            Unity game development, AI behavior work, and frontend landing pages.
           </p>
         </div>
 
         <div class="projects-grid">
           <article class="project-card reveal">
-            <div class="project-top">
-              <p class="mono-label">Project 01</p>
-              <h3>Kita Kits</h3>
-              <p>
-                A Security web app for tracking and monitoring students or staff in the campuses
-                and using qr code for entry and exit.
-              </p>
+            <div class="project-thumb thumb-system">
+              <span>System</span>
             </div>
-            <div class="project-tags">
-              <span>Laravel Framework</span>
-              <span>PHP</span>
-              <span>Vite</span>
-              <span>HTML5</span>
-              <span>CSS3</span>
-              <span>JavaScript</span>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <p class="mono-label">Project 02</p>
-              <h3>Laba App</h3>
-              <p>
-                A app made in laravel Framework modified in PHPnative that can be exported to APK app, 
-                this app is for laundry admins to track and manage their costumers and staff
-              </p>
-            </div>
-            <div class="project-tags">
-              <span>PHP</span>
-              <span>Vite</span>
-              <span>JavaScript</span>
-              <span>Responsive Design</span>
-              <span>UI Design</span>
+            <div class="project-content">
+              <h3>Library Management System</h3>
+              <p>A web system for cataloging books, handling borrowers, and organizing library records.</p>
+              <div class="badges">
+                <span>Laravel</span>
+                <span>PHP</span>
+                <span>MySQL</span>
+                <span>CSS</span>
+              </div>
+              <div class="project-actions">
+                <a href="#contact">Live Demo</a>
+                <a href="https://github.com/diomale" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#contact">Details</a>
+              </div>
             </div>
           </article>
 
           <article class="project-card reveal">
-            <div class="project-top">
-              <p class="mono-label">Project 03</p>
-              <h3>ShiMail</h3>
-              <p>
-                on-progress
-              </p>
+            <div class="project-thumb thumb-database">
+              <span>Platform</span>
             </div>
-            <div class="project-tags">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <p class="mono-label">Project 04</p>
-              <h3>Criss Cross</h3>
-              <p>
-                An android game release in itch.io ->
-                <a href="https://diomale-games.itch.io/criss-cross-mobile">Criss Cross Mobile</a>
-              </p>
-            </div>
-            <div class="project-tags">
-              <span>C#</span>
-              <span>Aseprite</span>
-              <span>Unity Engine</span>
+            <div class="project-content">
+              <h3>Prerequisition Management System</h3>
+              <p>A management system concept for checking requirements, organizing records, and reducing manual work.</p>
+              <div class="badges">
+                <span>PHP</span>
+                <span>JavaScript</span>
+                <span>MySQL</span>
+                <span>HTML</span>
+              </div>
+              <div class="project-actions">
+                <a href="#contact">Live Demo</a>
+                <a href="https://github.com/diomale" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#contact">Details</a>
+              </div>
             </div>
           </article>
 
           <article class="project-card reveal">
-            <div class="project-top">
-              <p class="mono-label">Project 05</p>
-              <h3>Break The Loop</h3>
-              <p>
-                An android game release in itch.io ->
-                <a href="https://diomale-games.itch.io/break-the-loop">Break The Loop</a>
-              </p>
+            <div class="project-thumb thumb-game">
+              <span>Unity</span>
             </div>
-            <div class="project-tags">
-              <span>C#</span>
-              <span>Aseprite</span>
-              <span>Unity Engine</span>
+            <div class="project-content">
+              <h3>Unity Game Projects</h3>
+              <p>Mobile and prototype games focused on mechanics, feedback, polish, and interactive design.</p>
+              <div class="badges">
+                <span>Unity</span>
+                <span>C#</span>
+                <span>Aseprite</span>
+                <span>Gameplay</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://diomale-games.itch.io" target="_blank" rel="noreferrer">Live Demo</a>
+                <a href="https://github.com/diomale" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#contact">Details</a>
+              </div>
             </div>
           </article>
 
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="tech-stack">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="section-label">Tech Stack</p>
-          <h2>Languages, tools, and technologies I use to build and learn.</h2>
-        </div>
-
-        <div class="stack-grid">
-          <article class="stack-card reveal">
-            <h3>Languages</h3>
-            <ul>
-              <li>HTML5</li>
-              <li>CSS3</li>
-              <li>JavaScript</li>
-              <li>Java</li>
-              <li>Python</li>
-              <li>C#, C++, C</li>
-            </ul>
+          <article class="project-card reveal">
+            <div class="project-thumb thumb-ai">
+              <span>AI</span>
+            </div>
+            <div class="project-content">
+              <h3>AI Enemy Systems</h3>
+              <p>Enemy behavior experiments using patrol logic, detection ranges, state changes, and response loops.</p>
+              <div class="badges">
+                <span>Unity</span>
+                <span>C#</span>
+                <span>AI Logic</span>
+                <span>State Machine</span>
+              </div>
+              <div class="project-actions">
+                <a href="#contact">Live Demo</a>
+                <a href="https://github.com/diomale" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#contact">Details</a>
+              </div>
+            </div>
           </article>
-          <article class="stack-card reveal">
-            <h3>Frameworks & Concepts</h3>
-            <ul>
-              <li>Laravel Framework</li>
-              <li>Unity Engine</li>
-              <li>Responsive Web Design</li>
-              <li>DOM Manipulation</li>
-              <li>Object-Oriented Programming</li>
-              <li>REST API Basics</li>
-              <li>Version Control Workflows</li>
-            </ul>
-          </article>
-          <article class="stack-card reveal">
-            <h3>Tools</h3>
-            <ul>
-              <li>Git & GitHub</li>
-              <li>VS Code</li>
-              <li>Herd</li>
-              <li>Canva</li>
-              <li>Command Line</li>
-              <li>Chrome DevTools</li>
-            </ul>
+
+          <article class="project-card reveal">
+            <div class="project-thumb thumb-web">
+              <span>Frontend</span>
+            </div>
+            <div class="project-content">
+              <h3>Landing Page Projects</h3>
+              <p>Responsive pages with dark UI, clean visual hierarchy, smooth motion, and conversion-focused sections.</p>
+              <div class="badges">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>UI/UX</span>
+              </div>
+              <div class="project-actions">
+                <a href="#contact">Live Demo</a>
+                <a href="https://github.com/diomale" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#contact">Details</a>
+              </div>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="experience">
+    <section class="section compact-section" id="certificates">
+      <div class="container">
+        <div class="section-heading centered reveal">
+          <p class="eyebrow">Certificates</p>
+          <h2>Supporting credentials.</h2>
+          <p>
+            Certificates are displayed as proof of continuous learning while keeping
+            project work as the main portfolio focus.
+          </p>
+        </div>
+
+        <div class="certificate-grid">
+          <article class="certificate-card reveal">
+            <div class="certificate-preview">JS</div>
+            <h3>JavaScript Essentials 1</h3>
+            <p>Cisco Networking Academy</p>
+            <span class="date">2026</span>
+            <div class="badges small">
+              <span>JavaScript</span>
+              <span>Programming</span>
+            </div>
+            <a href="My-Certificate/JavaScript_Essentials_1_certificate_insane0225-gmail-com_ed9ecc4d-a7d5-40b4-9e91-28d582c3769f.pdf" target="_blank" rel="noreferrer">Verify</a>
+          </article>
+
+          <article class="certificate-card reveal">
+            <div class="certificate-preview">CSS</div>
+            <h3>CSS Essentials</h3>
+            <p>Cisco Networking Academy</p>
+            <span class="date">2026</span>
+            <div class="badges small">
+              <span>CSS</span>
+              <span>Responsive UI</span>
+            </div>
+            <a href="My-Certificate/CSS_Essentials_certificate_insane0225-gmail-com_2b3ade5c-7f14-4de2-b133-5e31144f961f.pdf" target="_blank" rel="noreferrer">Verify</a>
+          </article>
+
+          <article class="certificate-card reveal">
+            <div class="certificate-preview">AI</div>
+            <h3>Introduction to Modern AI</h3>
+            <p>Cisco Networking Academy</p>
+            <span class="date">2026</span>
+            <div class="badges small">
+              <span>AI</span>
+              <span>Research</span>
+            </div>
+            <a href="My-Certificate/Introduction_to_Modern_AI_certificate_insane0225-gmail-com_340bcd01-d729-43b1-adfe-6a17ff4693fb.pdf" target="_blank" rel="noreferrer">Verify</a>
+          </article>
+
+          <article class="certificate-card reveal">
+            <div class="certificate-preview">PY</div>
+            <h3>Python Essentials 2</h3>
+            <p>Cisco Networking Academy</p>
+            <span class="date">2026</span>
+            <div class="badges small">
+              <span>Python</span>
+              <span>Logic</span>
+            </div>
+            <a href="My-Certificate/Python_Essentials_2_certificate_insane0225-gmail-com_ef825654-0972-414b-91e3-c4f0d7af3135.pdf" target="_blank" rel="noreferrer">Verify</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="timeline">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="section-label">Experience</p>
-          <h2>Early experience through academics, internships, and independent work.</h2>
+          <p class="eyebrow">Timeline</p>
+          <h2>Developer journey.</h2>
         </div>
 
         <div class="timeline">
           <article class="timeline-item reveal">
-            <p class="mono-label">School Project</p>
-            <h3>Capstone or Class-Based System</h3>
-            <p>
-              Replace this with a major academic project and explain the problem,
-              your role, and the technical work you completed.
-            </p>
+            <span class="timeline-year">2024</span>
+            <div>
+              <h3>Started building with Unity</h3>
+              <p>Started Unity development and built the first AI enemy behavior experiments.</p>
+            </div>
           </article>
           <article class="timeline-item reveal">
-            <p class="mono-label">Freelance / Personal Work</p>
-            <h3>Website for a Small Client or Organization</h3>
-            <p>
-              Add any freelance or volunteer project where you gathered requirements,
-              built the interface, and delivered a usable solution.
-            </p>
+            <span class="timeline-year">2025</span>
+            <div>
+              <h3>Built academic and web systems</h3>
+              <p>Created a Library System, strengthened Laravel knowledge, and improved database workflows.</p>
+            </div>
           </article>
           <article class="timeline-item reveal">
-            <p class="mono-label">Internship</p>
-            <h3>Software or IT Internship Experience</h3>
-            <p>
-              If applicable, summarize the team, tasks, technologies, and what you learned
-              in a real development environment.
-            </p>
+            <span class="timeline-year">2026</span>
+            <div>
+              <h3>Advanced systems and personal brand</h3>
+              <p>Built management systems, expanded certificates, and started a focused developer brand.</p>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section" id="skills">
       <div class="container">
-        <div class="contact-card reveal">
-          <div>
-            <p class="section-label">Contact</p>
-            <h2>Open to internships, collaborations, and software development opportunities.</h2>
-            <p class="section-text">
-              Replace the details below with your own contact information and GitHub profile.
-            </p>
-          </div>
-          <div class="contact-links">
-            <a class="contact-link" href="mailto:alexcarter@example.com">alexcarter@example.com</a>
-            <a class="contact-link" href="https://github.com/diomale" target="_blank" rel="noreferrer">https://github.com/diomale</a>
-          </div>
+        <div class="section-heading centered reveal">
+          <p class="eyebrow">Skills</p>
+          <h2>Technical toolkit.</h2>
+          <p>Organized skills for programming, frameworks, databases, game development, and UI work.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <h3>Programming Languages</h3>
+            <div class="skill-badges">
+              <span>JavaScript</span>
+              <span>PHP</span>
+              <span>Python</span>
+              <span>C#</span>
+              <span>HTML</span>
+              <span>CSS</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>Frameworks &amp; Tools</h3>
+            <div class="skill-badges">
+              <span>Laravel</span>
+              <span>Git</span>
+              <span>GitHub</span>
+              <span>VS Code</span>
+              <span>Vite</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>Databases</h3>
+            <div class="skill-badges">
+              <span>MySQL</span>
+              <span>CRUD</span>
+              <span>Queries</span>
+              <span>Data Modeling</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>Game Development</h3>
+            <div class="skill-badges">
+              <span>Unity</span>
+              <span>Gameplay</span>
+              <span>Enemy AI</span>
+              <span>Aseprite</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>UI/UX</h3>
+            <div class="skill-badges">
+              <span>Responsive Design</span>
+              <span>Wireframes</span>
+              <span>Dark UI</span>
+              <span>Microinteractions</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-layout">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Contact</p>
+          <h2>Let us build something useful.</h2>
+          <p>
+            Reach out for software systems, game development ideas, collaboration,
+            internships, or portfolio updates.
+          </p>
+
+          <div class="contact-links">
+            <a href="mailto:your.email@example.com">Email: your.email@example.com</a>
+            <a href="https://github.com/diomale" target="_blank" rel="noreferrer">GitHub: github.com/diomale</a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn: Add your profile</a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook: Add your profile</a>
+            <a href="#contact">Discord: Add your username</a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal">
+          <label>
+            Name
+            <input type="text" name="name" placeholder="Your name">
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com">
+          </label>
+          <label>
+            Subject
+            <input type="text" name="subject" placeholder="Project inquiry">
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="6" placeholder="Tell me about your idea."></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Send Message</button>
+          <p class="form-note">This static form shows the UI only. Connect it to Formspree, EmailJS, or your backend when ready.</p>
+        </form>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>Diomale Romero Developer Hub</p>
+      <a href="#home">Back to top</a>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
