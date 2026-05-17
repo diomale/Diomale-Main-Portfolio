@@ -11,9 +11,13 @@ function closeMenu() {
     return;
   }
 
-  siteNav.classList.remove("is-open");
-  document.body.classList.remove("nav-open");
-  navToggle.setAttribute("aria-expanded", "false");
+  // Small delay to ensure the browser registers the link click/jump 
+  // before we hide the menu and set pointer-events: none
+  setTimeout(() => {
+    siteNav.classList.remove("is-open");
+    document.body.classList.remove("nav-open");
+    navToggle.setAttribute("aria-expanded", "false");
+  }, 150);
 }
 
 if (navToggle && siteNav) {
@@ -24,7 +28,33 @@ if (navToggle && siteNav) {
   });
 
   navLinks.forEach((link) => {
-    link.addEventListener("click", closeMenu);
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      
+      // Handle internal anchor links
+      if (href.startsWith("#") && href.length > 1) {
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          // If we are on mobile (nav is open), we handle it specially
+          if (siteNav.classList.contains("is-open")) {
+            e.preventDefault();
+            
+            // 1. Close the menu immediately
+            siteNav.classList.remove("is-open");
+            document.body.classList.remove("nav-open");
+            navToggle.setAttribute("aria-expanded", "false");
+
+            // 2. Wait for the menu transition to start, then scroll
+            setTimeout(() => {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }, 50);
+          }
+          // On desktop, the default anchor jump works fine
+        }
+      }
+    });
   });
 
   window.addEventListener("keydown", (event) => {
@@ -175,106 +205,112 @@ if (contactForm && formStatus) {
 
 
 // Interactive Infinite Carousel Logic
-const carousel = document.querySelector(".projects-carousel");
-const track = document.querySelector(".projects-track");
+function initCarousel(carouselSelector, trackSelector) {
+  const carousel = document.querySelector(carouselSelector);
+  const track = document.querySelector(trackSelector);
 
-if (carousel && track) {
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-  let isPaused = false;
-  const scrollSpeed = 0.8;
-  let animationId;
-  let currentScroll = 0;
+  if (carousel && track) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let isPaused = false;
+    const scrollSpeed = 0.8;
+    let animationId;
+    let currentScroll = 0;
 
-  const getHalfWidth = () => track.scrollWidth / 2;
+    const getHalfWidth = () => track.scrollWidth / 2;
 
-  const autoScroll = () => {
-    if (!isPaused && !isDown) {
-      currentScroll += scrollSpeed;
-      const halfWidth = getHalfWidth();
-      if (currentScroll >= halfWidth) {
-        currentScroll -= halfWidth;
+    const autoScroll = () => {
+      if (!isPaused && !isDown) {
+        currentScroll += scrollSpeed;
+        const halfWidth = getHalfWidth();
+        if (currentScroll >= halfWidth) {
+          currentScroll -= halfWidth;
+        }
+        carousel.scrollLeft = currentScroll;
+      } else {
+        currentScroll = carousel.scrollLeft;
       }
-      carousel.scrollLeft = currentScroll;
-    } else {
-      currentScroll = carousel.scrollLeft;
-    }
+      animationId = requestAnimationFrame(autoScroll);
+    };
+
     animationId = requestAnimationFrame(autoScroll);
-  };
 
-  animationId = requestAnimationFrame(autoScroll);
+    carousel.addEventListener("mouseenter", () => {
+      isPaused = true;
+    });
 
-  carousel.addEventListener("mouseenter", () => {
-    isPaused = true;
-  });
-
-  carousel.addEventListener("mouseleave", () => {
-    if (!isDown) isPaused = false;
-    isDown = false;
-    carousel.classList.remove("is-dragging");
-  });
-
-  carousel.addEventListener("mousedown", (e) => {
-    isDown = true;
-    isPaused = true;
-    carousel.classList.add("is-dragging");
-    startX = e.pageX - carousel.offsetLeft;
-    scrollLeft = carousel.scrollLeft;
-  });
-
-  window.addEventListener("mouseup", () => {
-    if (isDown) {
+    carousel.addEventListener("mouseleave", () => {
+      if (!isDown) isPaused = false;
       isDown = false;
-      isPaused = false;
       carousel.classList.remove("is-dragging");
-    }
-  });
+    });
 
-  carousel.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 2;
-    carousel.scrollLeft = scrollLeft - walk;
-    currentScroll = carousel.scrollLeft;
+    carousel.addEventListener("mousedown", (e) => {
+      isDown = true;
+      isPaused = true;
+      carousel.classList.add("is-dragging");
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+    });
 
-    const halfWidth = getHalfWidth();
-    if (carousel.scrollLeft >= halfWidth) {
-      carousel.scrollLeft -= halfWidth;
-      scrollLeft -= halfWidth;
-      currentScroll = carousel.scrollLeft;
-    } else if (carousel.scrollLeft <= 0) {
-      carousel.scrollLeft += halfWidth;
-      scrollLeft += halfWidth;
-      currentScroll = carousel.scrollLeft;
-    }
-  });
+    window.addEventListener("mouseup", () => {
+      if (isDown) {
+        isDown = false;
+        isPaused = false;
+        carousel.classList.remove("is-dragging");
+      }
+    });
 
-  carousel.addEventListener("wheel", (e) => {
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    carousel.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
       e.preventDefault();
-      carousel.scrollLeft += e.deltaY;
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 2;
+      carousel.scrollLeft = scrollLeft - walk;
       currentScroll = carousel.scrollLeft;
 
       const halfWidth = getHalfWidth();
       if (carousel.scrollLeft >= halfWidth) {
         carousel.scrollLeft -= halfWidth;
+        scrollLeft -= halfWidth;
         currentScroll = carousel.scrollLeft;
       } else if (carousel.scrollLeft <= 0) {
         carousel.scrollLeft += halfWidth;
+        scrollLeft += halfWidth;
         currentScroll = carousel.scrollLeft;
       }
-    }
-  }, { passive: false });
+    });
 
-  carousel.addEventListener("touchstart", () => {
-    isPaused = true;
-  }, { passive: true });
+    carousel.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        carousel.scrollLeft += e.deltaY;
+        currentScroll = carousel.scrollLeft;
 
-  carousel.addEventListener("touchend", () => {
-    setTimeout(() => { 
-      if (!isDown) isPaused = false; 
-    }, 2000);
-  }, { passive: true });
+        const halfWidth = getHalfWidth();
+        if (carousel.scrollLeft >= halfWidth) {
+          carousel.scrollLeft -= halfWidth;
+          currentScroll = carousel.scrollLeft;
+        } else if (carousel.scrollLeft <= 0) {
+          carousel.scrollLeft += halfWidth;
+          currentScroll = carousel.scrollLeft;
+        }
+      }
+    }, { passive: false });
+
+    carousel.addEventListener("touchstart", () => {
+      isPaused = true;
+    }, { passive: true });
+
+    carousel.addEventListener("touchend", () => {
+      setTimeout(() => { 
+        if (!isDown) isPaused = false; 
+      }, 2000);
+    }, { passive: true });
+  }
 }
+
+// Initialize Carousels
+initCarousel(".projects-carousel", ".projects-track");
+initCarousel(".certificate-carousel", ".certificate-track");
