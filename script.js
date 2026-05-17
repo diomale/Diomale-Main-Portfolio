@@ -133,6 +133,59 @@ document.querySelectorAll(".portal-card, .project-card, .skill-card").forEach((c
   });
 });
 
+// --- Certificate Modal Logic ---
+const certModal = document.getElementById("cert-modal");
+const modalTitle = document.getElementById("modal-title");
+const modalBody = document.getElementById("modal-body");
+const modalClose = document.querySelector(".modal-close");
+const modalOverlay = document.querySelector(".modal-overlay");
+
+function openModal(src, title) {
+  if (!certModal || !modalTitle || !modalBody) return;
+
+  modalTitle.textContent = title;
+
+  const wraps = modalBody.querySelectorAll(".cert-img-wrap");
+  wraps.forEach((w) => w.classList.remove("is-active"));
+
+  const target = modalBody.querySelector(`.cert-img-wrap[data-src="${src}"]`);
+  if (target) target.classList.add("is-active");
+
+  certModal.classList.add("is-open");
+  certModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  if (!certModal) return;
+
+  certModal.classList.remove("is-open");
+  certModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+
+  const wraps = modalBody.querySelectorAll(".cert-img-wrap");
+  wraps.forEach((w) => w.classList.remove("is-active"));
+}
+
+if (modalClose) modalClose.addEventListener("click", closeModal);
+if (modalOverlay) modalOverlay.addEventListener("click", closeModal);
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && certModal && certModal.classList.contains("is-open")) {
+    closeModal();
+  }
+});
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-cert-view");
+  if (!btn) return;
+
+  const src = btn.getAttribute("data-src");
+  const card = btn.closest(".certificate-card");
+  const title = card ? card.querySelector("h3").textContent : "Certificate";
+  openModal(src, title);
+});
+
 // --- EmailJS Integration ---
 // Replace these with your actual IDs from the EmailJS Dashboard
 const EMAILJS_PUBLIC_KEY = "h-HuBSZqFViGB4Aut"; 
